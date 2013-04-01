@@ -3,7 +3,7 @@ var sitescript = require('sitescript');
 sitescript.setup({
 	posts: './posts',
 	theme: './theme',
-	serve: './.www',
+	serve: './www',
 	port: process.env.PORT || process.env.VCAP_APP_PORT || 8080
 });
 
