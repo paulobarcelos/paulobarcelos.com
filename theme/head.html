@@ -1,0 +1,37 @@
+<!doctype html>
+<html dir="ltr" lang="en-US">
+	<head>
+		<meta charset="UTF-8">
+		<title>{{title}}</title>
+		<meta property="og:title" content="{{title}}">
+		{{#if description}}
+			<meta property="og:description" content="{{description}}">
+			<meta property="description" content="{{description}}">
+		{{/if}}
+
+		{{#if image}}
+			<meta property="og:image" content="{{root.domain}}{{image}}">
+		{{/if}}
+		{{#if type}}
+			<meta property="og:type" content="{{type}}">
+		{{/if}}
+
+		<meta property="og:url" content="{{root.domain}}{{permalink}}">
+		<link rel="canonical" href="{{root.domain}}{{permalink}}" />
+		
+		<meta name="robots" content="all">
+		<meta name="robots" content="index, follow">
+
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+
+		<link rel="stylesheet" type="text/css" href="/theme/style.css">
+	</head>
+	<body>
+		<header>
+			<h1><a href="{{root.permalink}}" title="{{root.title}}">{{root.title}}</a></h1>
+			<ul>
+				{{#each root.children}}
+					<li><a href="{{permalink}}" title="{{title}}">{{title}}</a></li>
+				{{/each}}
+			</ul>
+		</header>
