@@ -1,5 +1,6 @@
 var 
 exports = module.exports,
+path = require('path'),
 fs = require('fs'),
 http = require('http'),
 handlebars = require('handlebars'),
@@ -50,7 +51,7 @@ var generateValidSettings = function(options){
 		options.theme = './theme';
 	}
 	if(!options.serve){
-		options.serve = './.www';
+		options.serve = './www';
 	}
 	if(!options.port){
 		options.port = 8080;
@@ -225,16 +226,22 @@ var create404File = function(post, rootPath){
 }
 var createThemeResourcesSymlinks = function(theme, themePath, publishPath){
 	fs.mkdirSync(publishPath + '/theme/');
+	var fullThemePath = process.cwd() + '/' + themePath + '/';
+	var fullPublishPath = process.cwd() + '/' + publishPath + '/theme/';
+	var relativePath = path.relative(fullPublishPath, fullThemePath) + '/';
 	for (var i = 0; i < theme.resources.length; i++) {
-		var src = process.cwd() + '/' + themePath + '/' + theme.resources[i];
-		var dst = process.cwd() + '/' + publishPath + '/theme/' + theme.resources[i];
+		var src = relativePath + theme.resources[i];
+		var dst = fullPublishPath + theme.resources[i];
 		fs.symlinkSync(src, dst);
 	};
 }
 var createPostResourceSymlinksRecursively = function(post, rootContentPath, rootPublishPath){
 	for (var i = 0; i < post.resources.length; i++) {
-		var src = process.cwd() + '/' + rootContentPath + post.path +  post.resources[i];
-		var dst = process.cwd() + '/' + rootPublishPath + post.permalink +  post.resources[i];
+		var fullThemePath = process.cwd() + '/' + rootContentPath + post.path;
+		var fullPublishPath = process.cwd() + '/' + rootPublishPath + post.permalink ;
+		var relativePath = path.relative(fullPublishPath, fullThemePath) + '/';
+		var src = relativePath + post.resources[i];
+		var dst = fullPublishPath + post.resources[i];
 		fs.symlinkSync(src, dst);
 	};
 	for(var i = 0; i < post.children.length; i++){

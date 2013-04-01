@@ -1,5 +1,6 @@
 {
 	"name": "paulobarcelos-com",
+	"version": "0.0.2",
 	"dependencies" : {
 		"sitescript": "x"
 	},
