@@ -1,0 +1,9 @@
+{
+	"name": "paulobarcelos-com",
+	"dependencies" : {
+		"sitescript": "x"
+	},
+	"engines": {
+		"node": "x"
+	}
+}
